@@ -1,0 +1,40 @@
+POST {{pldPanelUrl}}/api/vi/analysis/12711/events
+login: MOCK_USER
+Content-Type: application/json
+
+{
+  "event_type": "COAF_COMMUNICATION",
+  "event_data": {
+    "creditValue": 25000,
+    "note": "Análise final indicando movimentações suspeitas.",
+    "alineas": [1012, 1220, 1015],
+    "involvements": [{
+      "codeInvolvementType": 1,
+      "name": "João Da Silva",
+      "document": "12345678901",
+      "branchName": "Agência Central",
+      "agencyNumber": "123",
+      "accountNumber": "00012345-6",
+      "openedAccountAt": "2020-03-15",
+      "updatedAccountAt": "2024-12-01",
+      "pep": true,
+      "personObliged": false,
+      "publicFunctionary": true
+    }]
+  },
+  "additionalInfo": {
+    "workflowVersion" : 1
+  }
+}
+
+POST curl -X POST "http://localhost:8080/tasks" \
+       -H "Content-Type: application/json" \
+       -d '{
+         "id": 1,
+         "author": "Vinicius",
+         "title": "Estudar Clean Architecture",
+         "status": "PENDING",
+         "dueDate": "2025-09-20T18:00:00",
+         "createdAt": "2025-09-16T10:00:00",
+         "updatedAt": "2025-09-16T10:00:00"
+       }'
