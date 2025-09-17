@@ -1,18 +1,19 @@
 package com.example.todo_list_clean_arch.infra.mapper;
 
 import com.example.todo_list_clean_arch.domain.enums.StatusEnum;
+import com.example.todo_list_clean_arch.domain.mapper.TaskMapper;
 import com.example.todo_list_clean_arch.domain.model.Task;
 import com.example.todo_list_clean_arch.infra.dto.TaskDTO;
 import com.example.todo_list_clean_arch.infra.persistence.entity.TaskEntity;
 
 import java.time.LocalDateTime;
 
-public class TaskMapperImpl implements TaskMapper{
+public class TaskMapperImpl implements TaskMapper {
     @Override
     public Task toModel(TaskEntity taskEntity) {
         Task task = new Task();
-        task.setAuthor(taskEntity.getAuthor());
         task.setId(taskEntity.getId());
+        task.setAuthor(taskEntity.getAuthor());
         task.setStatus(StatusEnum.valueOf(taskEntity.getStatus()));
         task.setTitle(taskEntity.getTitle());
         task.setDueDate(taskEntity.getDueDate());
@@ -24,6 +25,7 @@ public class TaskMapperImpl implements TaskMapper{
     @Override
     public TaskEntity toEntity(Task task) {
         TaskEntity taskEntity = new TaskEntity();
+        taskEntity.setId(task.getId());
         taskEntity.setAuthor(task.getAuthor());
         taskEntity.setStatus(task.getStatus().name());
         taskEntity.setTitle(task.getTitle());
@@ -36,8 +38,8 @@ public class TaskMapperImpl implements TaskMapper{
     @Override
     public Task toModel(TaskDTO taskDTO) {
         Task task = new Task();
-        task.setAuthor(taskDTO.getAuthor());
         task.setId(taskDTO.getId());
+        task.setAuthor(taskDTO.getAuthor());
         task.setStatus(taskDTO.getStatus());
         task.setTitle(taskDTO.getTitle());
         task.setDueDate(taskDTO.getDueDate());
@@ -49,8 +51,8 @@ public class TaskMapperImpl implements TaskMapper{
     @Override
     public TaskDTO fromModel(Task task) {
         TaskDTO taskDTO = new TaskDTO();
-        taskDTO.setAuthor(task.getAuthor());
         taskDTO.setId(task.getId());
+        taskDTO.setAuthor(task.getAuthor());
         taskDTO.setStatus(task.getStatus());
         taskDTO.setTitle(task.getTitle());
         taskDTO.setDueDate(task.getDueDate());
@@ -76,9 +78,6 @@ public class TaskMapperImpl implements TaskMapper{
     public void updateEntity(TaskEntity entity, Task task) {
         if (entity == null || task == null) {
             return;
-        }
-        if (task.getId() != null) {
-            entity.setId(task.getId());
         }
         if (task.getAuthor() != null) {
             entity.setAuthor(task.getAuthor());

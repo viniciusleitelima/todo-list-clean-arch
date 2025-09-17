@@ -1,11 +1,9 @@
 package com.example.todo_list_clean_arch.adapter.controller;
 
+import com.example.todo_list_clean_arch.domain.mapper.TaskMapper;
 import com.example.todo_list_clean_arch.domain.model.Task;
 import com.example.todo_list_clean_arch.domain.usecase.*;
 import com.example.todo_list_clean_arch.infra.dto.TaskDTO;
-import com.example.todo_list_clean_arch.infra.mapper.TaskMapper;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +42,7 @@ public class TaskController {
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TaskDTO findById(@PathVariable Long id){
+    public TaskDTO findById(@PathVariable String id){
         Task task = retrieveTaskByIdUseCase.execute(id);
         return taskMapper.fromModel(task);
     }
@@ -58,7 +56,7 @@ public class TaskController {
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TaskDTO update(@PathVariable Long id, @RequestBody TaskDTO taskDTO) {
+    public TaskDTO update(@PathVariable String id, @RequestBody TaskDTO taskDTO) {
         Task task = taskMapper.toModel(taskDTO);
         Task updateTask = updateTaskUseCase.execute(id, task);
         return taskMapper.fromModel(updateTask);
@@ -66,14 +64,14 @@ public class TaskController {
 
     @PostMapping(value = "/{id}/complete")
     @ResponseStatus(HttpStatus.OK)
-    public TaskDTO complete(@PathVariable Long id) {
+    public TaskDTO complete(@PathVariable String id) {
         Task task = completeTaskUseCase.execute(id);
         return taskMapper.fromModel(task);
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable String id) {
         deleteTaskUseCase.execute(id);
     }
 }

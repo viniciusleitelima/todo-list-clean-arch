@@ -10,27 +10,27 @@ import java.util.Optional;
 @Component
 public class TaskRepositoryImpl implements TaskRepository {
 
-    private final TaskJpaRepository jpaRepository;
+    private final TaskJpaRepository taskJpaRepository;
 
     public TaskRepositoryImpl(TaskJpaRepository jpaRepository) {
-        this.jpaRepository = jpaRepository;
+        this.taskJpaRepository = jpaRepository;
     }
 
     @Override
     public TaskEntity save(TaskEntity taskEntity) {
-        return jpaRepository.save(taskEntity);
+        return taskJpaRepository.save(taskEntity);
     }
 
     @Override
-    public Optional<TaskEntity> findById(Long id) {
-        return jpaRepository.findById(id);
+    public Optional<TaskEntity> findById(String id) {
+        return taskJpaRepository.findById(id);
     }
 
     @Override
     public List<TaskEntity> findAll() {
-        return jpaRepository.findAll();
+        return taskJpaRepository.findAll();
     }
 
     @Override
-    public void delete(TaskEntity taskEntity) { jpaRepository.delete(taskEntity);}
+    public void delete(TaskEntity taskEntity) { taskJpaRepository.delete(taskEntity);}
 }
