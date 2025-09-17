@@ -1,13 +1,14 @@
 package com.example.todo_list_clean_arch.infra.mapper;
 
 import com.example.todo_list_clean_arch.domain.enums.StatusEnum;
+import com.example.todo_list_clean_arch.domain.mapper.TaskMapper;
 import com.example.todo_list_clean_arch.domain.model.Task;
 import com.example.todo_list_clean_arch.infra.dto.TaskDTO;
 import com.example.todo_list_clean_arch.infra.persistence.entity.TaskEntity;
 
 import java.time.LocalDateTime;
 
-public class TaskMapperImpl implements TaskMapper{
+public class TaskMapperImpl implements TaskMapper {
     @Override
     public Task toModel(TaskEntity taskEntity) {
         Task task = new Task();
