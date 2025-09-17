@@ -24,6 +24,7 @@ public class TaskMapperImpl implements TaskMapper{
     @Override
     public TaskEntity toEntity(Task task) {
         TaskEntity taskEntity = new TaskEntity();
+        taskEntity.setId(task.getId());
         taskEntity.setAuthor(task.getAuthor());
         taskEntity.setStatus(task.getStatus().name());
         taskEntity.setTitle(task.getTitle());

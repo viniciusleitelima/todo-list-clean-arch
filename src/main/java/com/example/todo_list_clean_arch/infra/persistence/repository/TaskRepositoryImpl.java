@@ -6,32 +6,31 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Component
 public class TaskRepositoryImpl implements TaskRepository {
 
-    private final TaskMongoRepository taskMongoRepository;
+    private final TaskJpaRepository taskJpaRepository;
 
-    public TaskRepositoryImpl(TaskMongoRepository jpaRepository) {
-        this.taskMongoRepository = jpaRepository;
+    public TaskRepositoryImpl(TaskJpaRepository jpaRepository) {
+        this.taskJpaRepository = jpaRepository;
     }
 
     @Override
     public TaskEntity save(TaskEntity taskEntity) {
-        return taskMongoRepository.save(taskEntity);
+        return taskJpaRepository.save(taskEntity);
     }
 
     @Override
     public Optional<TaskEntity> findById(String id) {
-        return taskMongoRepository.findById(id);
+        return taskJpaRepository.findById(id);
     }
 
     @Override
     public List<TaskEntity> findAll() {
-        return taskMongoRepository.findAll();
+        return taskJpaRepository.findAll();
     }
 
     @Override
-    public void delete(TaskEntity taskEntity) { taskMongoRepository.delete(taskEntity);}
+    public void delete(TaskEntity taskEntity) { taskJpaRepository.delete(taskEntity);}
 }
