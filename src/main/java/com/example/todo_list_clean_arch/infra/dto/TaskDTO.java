@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class TaskDTO {
 
     @JsonProperty("id")
-    private Long id;
+    private String id;
 
     @JsonProperty("author")
     private String author;
@@ -24,11 +24,20 @@ public class TaskDTO {
     @JsonProperty("status")
     private StatusEnum status;
 
-    public Long getId() {
+    @JsonProperty("dueDate")
+    private LocalDateTime dueDate;
+
+    @JsonProperty("createdAt")
+    private LocalDateTime createdAt;
+
+    @JsonProperty("updatedAt")
+    private LocalDateTime updatedAt;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -80,12 +89,4 @@ public class TaskDTO {
         this.updatedAt = updatedAt;
     }
 
-    @JsonProperty("dueDate")
-    private LocalDateTime dueDate;
-
-    @JsonProperty("createdAt")
-    private LocalDateTime createdAt;
-
-    @JsonProperty("updatedAt")
-    private LocalDateTime updatedAt;
 }

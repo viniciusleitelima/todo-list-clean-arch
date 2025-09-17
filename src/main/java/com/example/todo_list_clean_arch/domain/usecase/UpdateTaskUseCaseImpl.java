@@ -22,7 +22,7 @@ public class UpdateTaskUseCaseImpl implements UpdateTaskUseCase {
     }
 
     @Override
-    public Task execute(Long id, Task task) {
+    public Task execute(String id, Task task) {
         logger.info("Iniciando atualização de task: id={}", id);
         try {
             TaskEntity taskEntity = findTaskById(id);
@@ -30,7 +30,7 @@ public class UpdateTaskUseCaseImpl implements UpdateTaskUseCase {
 
             TaskEntity updatedTaskEntity = taskRepository.save(taskEntity);
             Task updatedTask = taskMapper.toModel(updatedTaskEntity);
-            logger.info("Task atualizada com sucesso para o id: {}", updatedTask.getId());
+            logger.info("Task atualizada com sucesso para o id: {}", updatedTaskEntity.getId());
             return updatedTask;
         } catch (BusinessException e) {
             logger.error("Erro de negócio ao atualizar task, error={}",e.getMessage(), e);
@@ -41,7 +41,7 @@ public class UpdateTaskUseCaseImpl implements UpdateTaskUseCase {
         }
     }
 
-    private TaskEntity findTaskById(Long id){
+    private TaskEntity findTaskById(String id){
         return taskRepository.findById(id).orElseThrow(()->{
             logger.info("Task nao encontrada para atualização: id={}", id);
             return new BusinessException("task.update.not.found", id);

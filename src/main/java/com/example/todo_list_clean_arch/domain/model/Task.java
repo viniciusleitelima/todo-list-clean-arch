@@ -4,8 +4,9 @@ import com.example.todo_list_clean_arch.domain.enums.StatusEnum;
 
 import java.time.LocalDateTime;
 
+
 public class Task {
-    private Long id;
+    private String id;
     private String author;
     private String title;
     private StatusEnum status;
@@ -32,7 +33,7 @@ public class Task {
 
     public Task(){}
 
-    public Task(Long id, String author, LocalDateTime dueDate, StatusEnum status, String title, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Task(String id, String author, LocalDateTime dueDate, StatusEnum status, String title, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.author = author;
         this.dueDate = dueDate;
@@ -74,11 +75,11 @@ public class Task {
         this.dueDate = dueDate;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
