@@ -44,7 +44,7 @@ public class TaskController {
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TaskDTO findById(@PathVariable Long id){
+    public TaskDTO findById(@PathVariable String id){
         Task task = retrieveTaskByIdUseCase.execute(id);
         return taskMapper.fromModel(task);
     }
@@ -58,7 +58,7 @@ public class TaskController {
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TaskDTO update(@PathVariable Long id, @RequestBody TaskDTO taskDTO) {
+    public TaskDTO update(@PathVariable String id, @RequestBody TaskDTO taskDTO) {
         Task task = taskMapper.toModel(taskDTO);
         Task updateTask = updateTaskUseCase.execute(id, task);
         return taskMapper.fromModel(updateTask);
@@ -66,14 +66,14 @@ public class TaskController {
 
     @PostMapping(value = "/{id}/complete")
     @ResponseStatus(HttpStatus.OK)
-    public TaskDTO complete(@PathVariable Long id) {
+    public TaskDTO complete(@PathVariable String id) {
         Task task = completeTaskUseCase.execute(id);
         return taskMapper.fromModel(task);
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable String id) {
         deleteTaskUseCase.execute(id);
     }
 }

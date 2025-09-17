@@ -1,11 +1,12 @@
 package com.example.todo_list_clean_arch.infra.persistence.entity;
 
-import com.example.todo_list_clean_arch.domain.enums.StatusEnum;
-import jakarta.persistence.*;
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.time.LocalDateTime;
 
@@ -14,40 +15,31 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
-@Entity
-@Table(name = "task")
-@EntityListeners(AuditingEntityListener.class)
+@Document(collection = "task")
 public class TaskEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false)
     private String author;
 
-    @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
     private String status;
 
-    @Column(nullable = false)
     private LocalDateTime dueDate;
 
     @CreatedDate
-    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

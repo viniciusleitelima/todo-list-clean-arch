@@ -22,14 +22,14 @@ public class CompleteTaskUseCaseImpl implements CompleteTaskUseCase{
     }
 
     @Override
-    public Task execute(Long id) {
+    public Task execute(String id) {
         logger.info("Iniciando a completude da task");
         try {
             TaskEntity taskEntity = findTaskById(id);
             taskEntity.setStatus(StatusEnum.DONE.name());
             TaskEntity taskEntitySaved = taskRepository.save(taskEntity);
             Task taskSaved = taskMapper.toModel(taskEntitySaved);
-            logger.info("Task com a completude salva com sucesso para o id: {}", taskSaved.getId());
+            logger.info("Task com a completude salva com sucesso para o id: {}", taskEntitySaved.getId());
             return taskSaved;
         } catch (BusinessException e) {
             logger.error("Erro de negócio ao completar task: id={}, error={}", id, e.getMessage(), e);
@@ -40,7 +40,7 @@ public class CompleteTaskUseCaseImpl implements CompleteTaskUseCase{
         }
     }
 
-    private TaskEntity findTaskById(Long id){
+    private TaskEntity findTaskById(String id){
         return taskRepository.findById(id).orElseThrow(()->{
             logger.info("Task nao encontrada para finalização: id={}", id);
             return new BusinessException("task.complete.not.found", id);

@@ -16,7 +16,7 @@ public class DeleteUseCaseImpl implements DeleteTaskUseCase{
         this.taskRepository = taskRepository;
     }
     @Override
-    public void execute(Long id) {
+    public void execute(String id) {
         logger.info("Iniciando exclusão de task");
         try {
             TaskEntity taskEntity = findTaskById(id);
@@ -31,7 +31,7 @@ public class DeleteUseCaseImpl implements DeleteTaskUseCase{
         }
     }
 
-    private TaskEntity findTaskById(Long id){
+    private TaskEntity findTaskById(String id){
         return taskRepository.findById(id).orElseThrow(()->{
             logger.info("Task nao encontrada para deleção: id={}", id);
             return new BusinessException("task.delete.not.found", id);

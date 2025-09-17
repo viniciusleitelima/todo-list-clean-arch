@@ -20,12 +20,12 @@ public class RetrieveTaskByIdUseCaseImpl implements RetrieveTaskByIdUseCase{
         this.taskMapper = taskMapper;
     }
     @Override
-    public Task execute(Long id) {
+    public Task execute(String id) {
         logger.info("Iniciando busca de task: id={}", id);
         try {
             TaskEntity taskEntity = findTaskById(id);
             Task task = taskMapper.toModel(taskEntity);
-            logger.info("Task encontrada com sucesso para o id: {}", task.getId());
+            logger.info("Task encontrada com sucesso para o id: {}", taskEntity.getId());
             return task;
         } catch (BusinessException e) {
             logger.error("Erro de negócio ao recuperar task, error={}",e.getMessage(), e);
@@ -36,7 +36,7 @@ public class RetrieveTaskByIdUseCaseImpl implements RetrieveTaskByIdUseCase{
         }
     }
 
-    private TaskEntity findTaskById(Long id){
+    private TaskEntity findTaskById(String id){
         return taskRepository.findById(id).orElseThrow(()->{
             logger.info("Task nao encontrada para recuperação: id={}", id);
             return new BusinessException("task.retrieve.not.found", id);
