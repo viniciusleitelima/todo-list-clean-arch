@@ -2,7 +2,7 @@ package com.example.todo_list_clean_arch.domain.usecase;
 
 import com.example.todo_list_clean_arch.adapter.repository.TaskRepository;
 import com.example.todo_list_clean_arch.domain.exception.BusinessException;
-import com.example.todo_list_clean_arch.domain.mapper.TaskMapper;
+import com.example.todo_list_clean_arch.infra.mapper.TaskMapper;
 import com.example.todo_list_clean_arch.domain.model.Task;
 import com.example.todo_list_clean_arch.infra.persistence.entity.TaskEntity;
 import org.slf4j.Logger;
@@ -15,18 +15,15 @@ public class RetrieveAllTaskUseCaseImpl implements RetrieveAllTaskUseCase {
     private static final Logger logger = LoggerFactory.getLogger(RetrieveAllTaskUseCaseImpl.class);
 
     private final TaskRepository taskRepository;
-    private final TaskMapper taskMapper;
 
-    public RetrieveAllTaskUseCaseImpl(TaskRepository taskRepository, TaskMapper taskMapper) {
+    public RetrieveAllTaskUseCaseImpl(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
-        this.taskMapper = taskMapper;
     }
     @Override
     public List<Task> execute() {
         logger.info("Iniciando busca de todas as tasks");
         try {
-            List<TaskEntity> taskEntityList = taskRepository.findAll();
-            List<Task> taskList = taskEntityList.stream().map(taskMapper::toModel).toList();
+            List<Task> taskList = taskRepository.findAll();
             logger.info("Foram encontradas o total de: {} tasks", taskList.size());
             return taskList;
         } catch (Exception e) {

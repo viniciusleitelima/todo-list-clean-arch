@@ -1,6 +1,6 @@
 package com.example.todo_list_clean_arch.adapter.controller;
 
-import com.example.todo_list_clean_arch.domain.mapper.TaskMapper;
+import com.example.todo_list_clean_arch.infra.mapper.TaskMapper;
 import com.example.todo_list_clean_arch.domain.model.Task;
 import com.example.todo_list_clean_arch.domain.usecase.*;
 import com.example.todo_list_clean_arch.infra.dto.TaskDTO;
