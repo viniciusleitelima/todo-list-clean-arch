@@ -1,25 +1,25 @@
-package com.example.todo_list_clean_arch.infra.persistence.repository;
+package com.example.todo_list_clean_arch.infra.persistence.repository.mongo;
 
 import com.example.todo_list_clean_arch.adapter.repository.TaskRepository;
 import com.example.todo_list_clean_arch.domain.exception.BusinessException;
-import com.example.todo_list_clean_arch.domain.model.Task;
 import com.example.todo_list_clean_arch.infra.mapper.TaskMapper;
+import com.example.todo_list_clean_arch.domain.model.Task;
 import com.example.todo_list_clean_arch.infra.persistence.document.TaskDocument;
-import com.example.todo_list_clean_arch.infra.persistence.entity.TaskEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+
+
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class TaskRepositoryJpaImpl implements TaskRepository {
-    private final TaskJpaRepository taskRepository;
+public class TaskRepositoryMongoImpl implements TaskRepository {
+    private final TaskMongoRepository taskRepository;
     private final TaskMapper taskMapper;
 
-    private static final Logger logger = LoggerFactory.getLogger(TaskRepositoryJpaImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(TaskRepositoryMongoImpl.class);
 
-    public TaskRepositoryJpaImpl(TaskJpaRepository taskRepository, TaskMapper taskMapper) {
+    public TaskRepositoryMongoImpl(TaskMongoRepository taskRepository, TaskMapper taskMapper) {
         this.taskRepository = taskRepository;
         this.taskMapper = taskMapper;
     }
@@ -27,13 +27,13 @@ public class TaskRepositoryJpaImpl implements TaskRepository {
 
     @Override
     public Task save(Task task) {
-        TaskEntity taskDocumentSaved = taskRepository.save(taskMapper.toEntity(task));
+        TaskDocument taskDocumentSaved = taskRepository.save(taskMapper.toDocument(task));
         return taskMapper.toModel(taskDocumentSaved);
     }
 
     @Override
     public Task findById(String id) {
-        TaskEntity taskDocumentRetrieve = taskRepository.findById(id).orElseThrow(()->{
+         TaskDocument taskDocumentRetrieve = taskRepository.findById(id).orElseThrow(()->{
             logger.info("Task nao encontrada para recuperação: id={}", id);
             return new BusinessException("task.retrieve.not.found", id);
         });
@@ -47,7 +47,7 @@ public class TaskRepositoryJpaImpl implements TaskRepository {
 
     @Override
     public void delete(Task task) {
-        taskRepository.delete(taskMapper.toEntity(task));
+        taskRepository.delete(taskMapper.toDocument(task));
     }
 
     @Override

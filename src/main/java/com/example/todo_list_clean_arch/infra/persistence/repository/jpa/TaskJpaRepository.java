@@ -1,4 +1,4 @@
-package com.example.todo_list_clean_arch.infra.persistence.repository;
+package com.example.todo_list_clean_arch.infra.persistence.repository.jpa;
 
 import com.example.todo_list_clean_arch.infra.persistence.entity.TaskEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

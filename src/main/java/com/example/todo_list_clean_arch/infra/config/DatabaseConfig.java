@@ -2,11 +2,10 @@ package com.example.todo_list_clean_arch.infra.config;
 
 import com.example.todo_list_clean_arch.adapter.repository.TaskRepository;
 import com.example.todo_list_clean_arch.infra.mapper.TaskMapper;
-import com.example.todo_list_clean_arch.infra.persistence.repository.TaskJpaRepository;
-import com.example.todo_list_clean_arch.infra.persistence.repository.TaskMongoRepository;
-import com.example.todo_list_clean_arch.infra.persistence.repository.TaskRepositoryJpaImpl;
-import com.example.todo_list_clean_arch.infra.persistence.repository.TaskRepositoryMongoImpl;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.example.todo_list_clean_arch.infra.persistence.repository.jpa.TaskJpaRepository;
+import com.example.todo_list_clean_arch.infra.persistence.repository.mongo.TaskMongoRepository;
+import com.example.todo_list_clean_arch.infra.persistence.repository.jpa.TaskRepositoryJpaImpl;
+import com.example.todo_list_clean_arch.infra.persistence.repository.mongo.TaskRepositoryMongoImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
