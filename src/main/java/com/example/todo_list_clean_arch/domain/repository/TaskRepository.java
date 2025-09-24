@@ -1,4 +1,4 @@
-package com.example.todo_list_clean_arch.adapter.repository;
+package com.example.todo_list_clean_arch.domain.repository;
 
 import com.example.todo_list_clean_arch.domain.model.Task;
 import java.util.List;

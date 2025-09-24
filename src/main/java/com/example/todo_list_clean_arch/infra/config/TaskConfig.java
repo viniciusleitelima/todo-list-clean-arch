@@ -1,6 +1,6 @@
 package com.example.todo_list_clean_arch.infra.config;
 
-import com.example.todo_list_clean_arch.adapter.repository.TaskRepository;
+import com.example.todo_list_clean_arch.domain.repository.TaskRepository;
 import com.example.todo_list_clean_arch.infra.mapper.TaskMapper;
 import com.example.todo_list_clean_arch.domain.usecase.*;
 import com.example.todo_list_clean_arch.infra.mapper.TaskMapperImpl;
